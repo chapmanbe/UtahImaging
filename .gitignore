@@ -44,4 +44,6 @@ coverage.xml
 docs/_build/
 
 # VIM
-.swp
+*.swp
+
+*.pdf

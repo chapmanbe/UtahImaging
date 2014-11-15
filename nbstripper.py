@@ -1,11 +1,21 @@
+#Modified from
+# http://stackoverflow.com/questions/18734739/using-ipython-notebooks-under-version-control
+
 from IPython.nbformat import current
 import io
 from os import remove, rename
 from shutil import copyfile
 from subprocess import Popen
 from sys import argv
+import argparse
 
-for filename in argv[1:]:
+parser = argparse.ArgumentParser(description="strip output from IPython notebook and add stripped version to git")
+parser.add_argument('--message', '-m',help="message for the git commit",default="undocumented change")
+parser.add_argument('files',metavar="files",nargs="+", help="list of notebooks to be committed")
+
+args = parser.parse_args()
+
+for filename in args.files:
     # Backup the current file
     backup_filename = filename + ".backup"
     copyfile(filename,backup_filename)
@@ -33,6 +43,6 @@ for filename in argv[1:]:
     finally:
         # Restore the original file;  remove is needed in case
         # we are running in windows.
-        pass
-        #remove(filename)
-        #rename(backup_filename,filename)
+        remove(filename)
+        rename(backup_filename,filename)
+        Popen(["git","commit","-m",args.message]).wait()
