@@ -1,3 +1,4 @@
+/Users/brian/anaconda/bin/python
 #Modified from
 # http://stackoverflow.com/questions/18734739/using-ipython-notebooks-under-version-control
 

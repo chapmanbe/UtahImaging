@@ -47,3 +47,9 @@ docs/_build/
 *.swp
 
 *.pdf
+*.png
+*.text
+*.html
+*.backup
+
+*.ipynb_checkpoints
